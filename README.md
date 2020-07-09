@@ -1,0 +1,36 @@
+# BirdUp
+
+Written to assist in taking photos of birds at a feeder. Saves results to a DB viewable from web application
+
+## Requirements
+
+* A Device (Raspberry Pi or other portable nix based system is intended).
+* Docker
+* Camera [Compatible](http://www.gphoto.org/proj/libgphoto2/support.php) with libgphoto2
+* Cable to connect Camera to Device
+
+## Installation
+
+## Built With
+
+* Frontend
+  * Typescript
+  * React
+  * Styled-Components
+  * Exif-JS
+  * ApolloClient
+* Backend
+  * Java
+  * Quarkus
+  * Graphql
+  * GRPC
+  * Hibernate ORM
+  * Postgresql
+* Storage
+  * Go
+  * GRPC
+  * Minio
+* Camera
+  * C++
+  * libgphoto2
+  * GRPC
