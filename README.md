@@ -34,3 +34,18 @@ Written to assist in taking photos of birds at a feeder. Saves results to a DB v
   * C++
   * libgphoto2
   * GRPC
+
+
+* Detection
+  * Northern Cardinal
+  * Blue Jay
+  * Downy Woodpecker
+  * American Goldfinch
+  * Black Capped Chickadee
+  * Lesser Goldfinch
+  * House Finch
+  * House Sparrow
+  * Mourning Dove
+  * European Starling
+  * White Breasted Nuthatch
+  * Common Grackle
