@@ -34,12 +34,13 @@ func (a *App) FetchHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Upload hit")
 	multiErr := r.ParseMultipartForm(32 << 20)
 	if multiErr != nil {
 		http.Error(w, "failed to parse multipart message", http.StatusBadRequest)
 	}
 
-	file, handler, err := r.FormFile("bundle")
+	file, handler, err := r.FormFile("file")
 	if err != nil {
 		http.Error(w, "failed to parse multipart message", http.StatusBadRequest)
 		return
@@ -55,11 +56,9 @@ func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	
-
 	fmt.Println("Successfully Uploaded File")
 
-	tmpFile, err := ioutil.TempFile("birdup", handler.Filename)
+	tmpFile, err := ioutil.TempFile("", handler.Filename)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -69,7 +68,8 @@ func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer os.Remove(tmpFile.Name())
-
+	fmt.Println("FileName")
+	fmt.Println(tmpFile.Name())
 	mediaType, _, err := mime.ParseMediaType(handler.Header.Get("Content-Type"))
 	// Upload the zip file
 	objectName := handler.Filename
@@ -88,10 +88,10 @@ func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Init() MinioConnection {
-	endpoint := ""
-	accessKeyID := ""
-	secretAccessKey := ""
-	useSSL := true
+	endpoint := "localhost:9001"
+	accessKeyID := "minio"
+	secretAccessKey := "minio123"
+	useSSL := false
 
 	// Initialize minio client object.
 	minioClient, err := minio.New(endpoint, accessKeyID, secretAccessKey, useSSL)
@@ -128,6 +128,6 @@ func main() {
 	app.Router.HandleFunc("/fetch", app.FetchHandler)
 
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":8000", app.Router))
+	log.Fatal(http.ListenAndServe(":8081", app.Router))
 
 }
