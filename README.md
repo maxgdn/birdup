@@ -23,18 +23,17 @@ Written to assist in taking photos of birds at a feeder. Saves results to a DB v
   * Java
   * Quarkus
   * Graphql
-  * GRPC
+  * HTTP
   * Hibernate ORM
   * Postgresql
 * Storage
   * Go
-  * GRPC
+  * HTTP
   * Minio
 * Camera
-  * C++
+  * Python
   * libgphoto2
-  * GRPC
-
+  * HTTP
 
 * Detection
   * Northern Cardinal
