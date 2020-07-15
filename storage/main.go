@@ -3,12 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
+	"bufio"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
 	"os"
 	"mime"
+	"encoding/json"
+	"encoding/base64"
 	"github.com/gorilla/mux"
 	"github.com/minio/minio-go/v6"
 )
@@ -22,15 +25,59 @@ type App struct {
 	Minio  MinioConnection
 }
 
+type FetchContent struct {
+	File string `json:"file"` 
+}
+
+type FetchQuery struct {
+	Id string `json:"id"` 
+}
+
 func (a *App) FetchHandler(w http.ResponseWriter, r *http.Request) {
+	
+	var t FetchQuery
+
+	enflated, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	err = json.Unmarshal(enflated, &t)
+
+	if err != nil {
+        panic(err.Error())
+    }
+
+	log.Println(t.Id)
+
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
-
-	err := a.Minio.Client.FGetObjectWithContext(ctx, a.Minio.Bucket, "myobject", "/tmp/myobject", minio.GetObjectOptions{})
+	tmpStr := "/tmp/" + string(t.Id)
+	log.Println(tmpStr)
+	err = a.Minio.Client.FGetObjectWithContext(ctx, a.Minio.Bucket, t.Id, tmpStr, minio.GetObjectOptions{})
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
+	f, _ := os.Open(tmpStr)
+
+	reader := bufio.NewReader(f)
+    content, _ := ioutil.ReadAll(reader)
+
+    // Encode as base64.
+    encoded := base64.StdEncoding.EncodeToString(content)
+
+	data := FetchContent{File: encoded}
+
+	err = os.Remove(tmpStr)  
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+    json.NewEncoder(w).Encode(data)
 }
 
 func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
