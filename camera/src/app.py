@@ -17,7 +17,7 @@ async def handle(request):
     # send to block storage
     
     loop = asyncio.get_event_loop()
-    status = loop.run_until_complete(send_to_storage(loop ,data['uuid'],image_bytes))
+    status = loop.run_until_complete(send_to_storage(loop ,data['id'],image_bytes))
 
     # return 500 on storage failure
     if not status:
@@ -28,7 +28,7 @@ async def handle(request):
 
 async def send_to_storage(loop, uid, image_bytes): 
     ##url = os.getEnv('BLOCK_STORAGE_URL')
-    url = "http://localhost:8081/upload"
+    url = "http://localhost:8082/upload"
 
     formdata = FormData()
     formdata.add_field('file',
@@ -60,4 +60,4 @@ async def init_app():
 app = init_app()
 
 
-web.run_app(app)
+web.run_app(app, port="8081")

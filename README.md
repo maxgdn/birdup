@@ -48,3 +48,13 @@ Written to assist in taking photos of birds at a feeder. Saves results to a DB v
   * European Starling
   * White Breasted Nuthatch
   * Common Grackle
+
+
+## Graphql
+
+
+Query
+    getAllSighting() //returns all sightings in DB
+    getSighting(id: ID)
+Mutation:
+    Snap() returns ID if successful //takes a photo

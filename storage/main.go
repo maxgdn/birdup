@@ -175,6 +175,6 @@ func main() {
 	app.Router.HandleFunc("/fetch", app.FetchHandler)
 
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":8081", app.Router))
+	log.Fatal(http.ListenAndServe(":8082", app.Router))
 
 }
