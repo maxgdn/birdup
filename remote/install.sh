@@ -1,1 +1,2 @@
-sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev
+pip install --pre gql
+pip install pybluez
