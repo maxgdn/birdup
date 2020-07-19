@@ -8,8 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@types/noble": "^0.0.40",
+    "graphql-request": "^2.0.0",
     "noble": "^1.9.1"
   }
 }
