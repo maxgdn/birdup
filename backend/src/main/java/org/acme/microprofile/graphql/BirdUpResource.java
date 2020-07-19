@@ -12,12 +12,17 @@ import org.eclipse.microprofile.graphql.Source;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
+import javax.json.JsonObject;
+import javax.json.JsonValue;
+import javax.json.Json;
+
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+
 @GraphQLApi
-class BirdUpResource {
+public class BirdUpResource {
 
     @Inject
     BirdingService service;
@@ -43,12 +48,15 @@ class BirdUpResource {
     public Sighting capture() throws Exception {
         
         String id = UUID.randomUUID().toString();
-        Capture cap = captureService.capture(id);
+        JsonObject jObject = Json.createObjectBuilder().add("id", id).build();
+        JsonValue ret = captureService.capture(jObject);
+        System.out.println("Value");
+        System.out.println(ret.toString());
         
         if(id.isEmpty()) {
             throw new Exception("Failed to capture image");
         }
-        return service.createSighting(cap.id);
+        return service.createSighting(ret.toString());
     }
 
     @Mutation

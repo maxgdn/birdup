@@ -4,12 +4,18 @@ from capture import Capture
 
 async def handle(request):
     data = await request.post()
+    body = await request.json()
     
     cap = request.app['capture']
 
     image_bytes = cap._do_capture()
 
-    print(image_bytes)
+    print("Data")
+    print(list(data))
+    print(list(body))
+    print("===================")
+
+    #print(image_bytes)
     # return 500 on capture failure
     if image_bytes is None:
         return web.HTTPInternalServerError(reason="Failed to capture image")
@@ -17,7 +23,7 @@ async def handle(request):
     # send to block storage
     
     loop = asyncio.get_event_loop()
-    status = loop.run_until_complete(send_to_storage(loop ,data['id'],image_bytes))
+    status = loop.run_until_complete(send_to_storage(loop ,body.get('id'),image_bytes))
 
     # return 500 on storage failure
     if not status:
