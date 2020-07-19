@@ -6,7 +6,7 @@ port = 1
 try:
     s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
     s.connect((addr,port))
-
+    print("Connected")
     try:
         while True:
             data = s.recv(1024)
@@ -17,6 +17,7 @@ try:
         pass
 except bluetooth.btcommon.BluetoothError as err:
     # Error handler
+    print(err)
     pass
 
 print("All done.")
