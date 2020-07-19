@@ -1,2 +1,2 @@
 pip install --pre gql
-pip install pybluez
+pip install evdev
