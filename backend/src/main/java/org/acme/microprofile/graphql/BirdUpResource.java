@@ -49,14 +49,14 @@ public class BirdUpResource {
         
         String id = UUID.randomUUID().toString();
         JsonObject jObject = Json.createObjectBuilder().add("id", id).build();
-        JsonValue ret = captureService.capture(jObject);
+        JsonObject ret = captureService.capture(jObject);
         System.out.println("Value");
-        System.out.println(ret.toString());
+        System.out.println(ret.getString("id"));
         
         if(id.isEmpty()) {
             throw new Exception("Failed to capture image");
         }
-        return service.createSighting(ret.toString());
+        return service.createSighting(ret.getString("id"));
     }
 
     @Mutation
