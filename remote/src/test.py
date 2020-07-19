@@ -8,11 +8,11 @@ try:
     s.connect((addr,port))
 
     try:
-    while True:
-        data = s.recv(1024)
-        if not data:
-            break
-        print("Received", data)
+        while True:
+            data = s.recv(1024)
+            if not data:
+                break
+            print("Received", data)
     except OSError:
         pass
 except bluetooth.btcommon.BluetoothError as err:
