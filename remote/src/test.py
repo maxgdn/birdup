@@ -1,6 +1,6 @@
 import bluetooth
 
-uuid = "0C:FC:83:2F:19:6D"
+uuid = "00001124-0000-1000-8000-00805f9b34fb"
 
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 server_sock.bind(("", bluetooth.PORT_ANY))
