@@ -1,4 +1,4 @@
-const noble = require('noble');
+const noble = require('@abandonware/noble');
 import {capture} from './capture';
 
 const id: string[] = ['0C:FC:83:2F:19:6D'];

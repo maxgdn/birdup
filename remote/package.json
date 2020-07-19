@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@abandonware/noble": "^1.9.2-9",
     "@types/noble": "^0.0.40",
-    "graphql-request": "^2.0.0",
-    "noble": "^1.9.1"
+    "graphql-request": "^2.0.0"
   }
 }
