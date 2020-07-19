@@ -1,26 +1,21 @@
+from evdev import InputDevice, categorize, ecodes
+from client import GQLClient
 
-# const id: string[] = ['0C:FC:83:2F:19:6D'];
-# const hidDevice = '00001124-0000-1000-8000-00805f9b34fb';
+ABShutter3 = InputDevice('/dev/input/event5')
 
-from gql import gql, Client, AIOHTTPTransport
+client = GQLClient()
 
-# Select your transport with a defined url endpoint
-transport = AIOHTTPTransport(url="http://192.168.4.2:8080/graphql")
+EV_VAL_PRESSED = 1
+EV_VAL_RELEASED = 0
+BTN_SHUTTER = 115
 
-# Create a GraphQL client using the defined transport
-client = Client(transport=transport, fetch_schema_from_transport=True)
+print(ABShutter3)
 
-# Provide a GraphQL query
-query = gql(
-    """
-    mutation CapturePhoto {
-        capture {
-            id
-        }
-    }
-"""
-)
-
-# Execute the query on the transport
-result = client.execute(query)
-print(result)
+for event in ABShutter3.read_loop():
+    if event.type == ecodes.EV_KEY:
+        if event.value == EV_VAL_PRESSED:
+            if event.code == BTN_SHUTTER:
+                print('---')
+                print('Shutter3 pressed')
+                client.capture()
+                print(event)
