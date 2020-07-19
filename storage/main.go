@@ -81,7 +81,6 @@ func (a *App) FetchHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Upload hit")
 	multiErr := r.ParseMultipartForm(32 << 20)
 	if multiErr != nil {
 		http.Error(w, "failed to parse multipart message", http.StatusBadRequest)
@@ -131,7 +130,9 @@ func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("Successfully uploaded %s of size %d\n", objectName, n)
 
-	w.Write([]byte("Success!"))
+	
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Success"))
 }
 
 func Init() MinioConnection {
