@@ -18,7 +18,8 @@ Written to assist in taking photos of birds at a feeder. Saves results to a DB v
   * React
   * Styled-Components
   * Exif-JS
-  * ApolloClient
+  * GQLClient
+  * Mobx
 * Backend
   * Java
   * Quarkus
@@ -34,8 +35,13 @@ Written to assist in taking photos of birds at a feeder. Saves results to a DB v
   * Python
   * libgphoto2
   * HTTP
+* Remote
+  * Python
+  * Evdev
+  * Bluetooth
+  * GQLClient(HTTP)
 
-* Detection
+* Sample Birds
   * Northern Cardinal
   * Blue Jay
   * Downy Woodpecker

@@ -27,7 +27,7 @@
     "clean-dist": "rimraf dist/*",
     "lint": "tslint './src/**/*.ts*' --format stylish --project . --force",
     "start": "yarn run start-dev",
-    "start-dev": "webpack-dev-server --config=configs/webpack/dev.js",
+    "start-dev": "webpack-dev-server --port 3000 --config=configs/webpack/dev.js",
     "start-prod": "yarn run build && node express.js",
     "test": "jest --coverage --watchAll --config=configs/jest.json"
   },
@@ -64,5 +64,9 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "grommet-icons": "^4.4.0",
+    "mobx": "^5.15.4",
+    "styled-components": "^5.1.1"
+  }
 }
