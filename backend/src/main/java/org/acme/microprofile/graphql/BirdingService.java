@@ -77,11 +77,9 @@ public class BirdingService {
         return sightingEntity;
     }
 
-    //## Bird
-
     public List<Bird> getAllBirds() {
-        return entityManager.createQuery("SELECT b FROM Bird b", Bird.class)
-                .getResultList();
+        return entityManager.createNamedQuery("Birds.findAll", Bird.class)
+        .getResultList();
     }
     
     public Bird getBird(String id) throws Exception {
@@ -92,17 +90,16 @@ public class BirdingService {
         return entity;
     }
 
-    public Set<Sighting> getSightingsByBird(String id) throws Exception {
+    public List<Sighting> getSightingsByBird(String id) throws Exception {
         Bird entity = entityManager.find(Bird.class, id);
         if(entity == null) {
             throw new Exception("Bird with id of " + id + "doesn't not exist.");
         }
-
-        return entity.getSightings();
+        return new ArrayList<>(entity.getSightings());
     }
 
     @Transactional
-    public Bird createBird(Bird bird) throws Exception {
+    public Bird createBird(String genusName, String name) throws Exception {
         UUID uuid = UUID.randomUUID();
         bird.setId(uuid);
 
@@ -114,13 +111,13 @@ public class BirdingService {
     }
 
     @Transactional
-    public String deleteBird(String id) throws Exception {
+    public Bird deleteBird(String id) throws Exception {
         Bird entity = entityManager.find(Bird.class, id);
         if(entity == null) {
             throw new Exception("Bird with id of " + id + "doesn't not exist.");
         }
 
         entityManager.remove(entity);
-        return "Deleted Bird";
+        return entity;
     }
 }

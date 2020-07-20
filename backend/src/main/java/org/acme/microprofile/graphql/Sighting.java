@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import java.util.UUID;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;

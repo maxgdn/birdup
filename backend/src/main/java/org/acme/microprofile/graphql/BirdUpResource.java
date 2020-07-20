@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-
 @GraphQLApi
 public class BirdUpResource {
 
@@ -37,21 +36,19 @@ public class BirdUpResource {
         return service.getAllSighting();
     }
 
-    @Query
+    @Query("getSighting")
     @Description("Get a Sighting from storage")
     public Sighting getSighting(@Name("sightingId") String id) throws Exception {
         return service.getSighting(id);
     }
 
-    @Mutation
+    @Mutation("capture")
     @Description("Captures an Image and creates a new Sighting")
     public Sighting capture() throws Exception {
         
         String id = UUID.randomUUID().toString();
         JsonObject jObject = Json.createObjectBuilder().add("id", id).build();
         JsonObject ret = captureService.capture(jObject);
-        System.out.println("Value");
-        System.out.println(ret.getString("id"));
         
         if(id.isEmpty()) {
             throw new Exception("Failed to capture image");
@@ -59,44 +56,45 @@ public class BirdUpResource {
         return service.createSighting(ret.getString("id"));
     }
 
-    @Mutation
+    @Mutation("addBird")
     @Description("Adds a Bird to Sighting")
     public Sighting addBird(@Name("sightingId") String sightingId, @Name("birdId") String birdId) throws Exception {
         return service.addBird(sightingId, birdId);
     }
 
-    @Mutation
+    @Mutation("removeBird")
     @Description("Removes a Bird from a Sighting")
     public Sighting removeBird(@Name("sightingId") String sightingId, @Name("birdId") String birdId) throws Exception {
         return service.removeBird(sightingId, birdId);
     }
 
-    @Query
+    @Query("allBirds")
     @Description("Get all Birds")
     public List<Bird> getAllBirds() {
         return service.getAllBirds();
     }
 
-    @Query
+    @Query("getBird")
     @Description("Get a Bird from storage")
     public Bird getBird(@Name("birdId") String id) throws Exception {
         return service.getBird(id);
     }
 
-    @Query
+    @Query("getSightingsByBird")
     @Description("Get all sightings of a specific bird")
-    public Set<Sighting> getSightingsByBird(@Name("birdId") String id) throws Exception {
+    public List<Sighting> getSightingsByBird(@Name("birdId") String id) throws Exception {
         return service.getSightingsByBird(id);
     }
 
-    @Mutation
+    @Mutation("createBird")
     @Description("Creates a Bird")
-    public Bird createBird(@Name("bird") Bird bird) throws Exception {
-        return service.createBird(bird);
+    public Bird createBird(@Name("genusName") String genusName, @Name("name") Stirng name) throws Exception {
+        return service.createBird(genusName, name);
     }
 
-
-
-
-
+    @Mutation("deleteBird")
+    @Description("Deletes a Bird")
+    public Bird deleteBird(@Name("id") String id) throws Exception {
+        return service.deleteBird(id);
+    }
 }

@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Cacheable;
 import javax.persistence.FetchType;
+import javax.persistence.QueryHint;;
+import javax.persistence.NamedQuery;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany; 
 
@@ -15,6 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "birds")
+@NamedQuery(name = "Birds.findAll", query = "SELECT b FROM Bird b", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
 @Cacheable
 public class Bird {
 
