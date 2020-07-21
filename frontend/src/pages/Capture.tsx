@@ -7,6 +7,7 @@ import {Button, CenterInPage, ImageCard} from '../components';
 import {useStores, colors} from '../core';
 
 import { Camera } from 'grommet-icons';
+import SightingModel from '../core/models/SightingModel';
 
 //capture images notify when if it worked or failed.
 
@@ -40,7 +41,7 @@ const Capture: React.FC = observer(() => {
         sightingStore.snap();
     }
 
-    const sightings = sightingStore.toJS();
+    const sightings: SightingModel[] = sightingStore.sightings;
     return (
         <CenterInPage>
             <CaptureFlexBox>

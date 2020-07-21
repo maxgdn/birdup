@@ -16,7 +16,7 @@ export default class SightingStore {
             runInAction(() => {
                 console.log("Sightings");
                 console.log(sightings);
-                this.sightings = sightings.map(sighting => new SightingModel(sighting, this));
+                this.sightings = sightings.map(sighting => new SightingModel(sighting, this)).reverse();
             });
 
         } catch (error) {
@@ -53,10 +53,14 @@ export default class SightingStore {
     }
 
     getSightings(): SightingModel[] {
-        return this.sightings.reverse();
+        return this.sightings;
+    }
+
+    get(id: string): SightingModel {
+        return this.sightings.filter(sighting => id === sighting.id)[0];
     }
 
     toJS(): Sighting[] {
-        return this.sightings.map((sighting: SightingModel) => sighting.toJS()).reverse();
+        return this.sightings.map((sighting: SightingModel) => sighting.toJS());
     }
 }

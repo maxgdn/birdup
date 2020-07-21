@@ -8,7 +8,7 @@ export const upsert = <T>(list : T[], compareOn: keyof T, toAdd: T): T[] => {
     }
 
     if(!found) {
-        list.push(toAdd);
+        list.unshift(toAdd);
     }
 
     return list;

@@ -12,5 +12,8 @@ import Button from './button/Button';
 
 import GlobalStyle from './GlobalStyle'
 
+import ImageCollection from './imagecollection/ImageCollection';
+import ImageItem from './imagecollection/ImageItem';
 
-export {Content,GlobalStyle,Header, NavBar, Title, Button, CenterInPage, ImageCard};
+
+export {Content,GlobalStyle,Header, NavBar, Title, Button, CenterInPage, ImageCard, ImageItem, ImageCollection};

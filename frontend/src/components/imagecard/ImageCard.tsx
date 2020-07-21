@@ -11,9 +11,10 @@ import Sighting from '../../core/domain/Sighting';
 import {colors} from '../../core';
 
 import {fetchImage} from '../../core/client';
+import SightingModel from '../../core/models/SightingModel';
 
 interface ImageCardProps {
-    sighting: Sighting
+    sighting: SightingModel
 }
 
 const Card = styled.div`
@@ -48,9 +49,10 @@ interface ImageState {
 
 const ImageCard: React.FC<ImageCardProps> = (props) => {
     const [data, setData] = useState<ImageState>({image: "", tags: {}});
+    const sighting = props.sighting.toJS();
     useEffect(() => {
         let getData = async () => {
-            const d = await fetchImage(props.sighting.id + '.jpeg');
+            const d = await fetchImage(sighting.id + '.jpeg');
             const meta = ExifReader.load(base64ToArrayBuffer(d));
             console.log("TAGS");
             console.log(meta);
@@ -58,13 +60,13 @@ const ImageCard: React.FC<ImageCardProps> = (props) => {
         }
         
         getData();
-    },[props.sighting.id]);
+    },[sighting.id]);
 
    return (
     <Card>
         <Image src={"data:image/jpg;base64," + data.image}/>
-        <Item>ID: {props.sighting.id}</Item>
-        <Item>Captured Date: {format(new Date(props.sighting.capturedDate),"yyyy-MM-dd' 'HH:mm:ss")}</Item>
+        <Item>ID: {sighting.id}</Item>
+        <Item>Captured Date: {format(new Date(sighting.capturedDate),"yyyy-MM-dd' 'HH:mm:ss")}</Item>
         {Object.keys(data.tags).length > 0 ?
             <>
             <Item>Model : {data.tags.Model.description}</Item>
@@ -74,6 +76,7 @@ const ImageCard: React.FC<ImageCardProps> = (props) => {
             <Item>Width : {data.tags['Image Width'].description}</Item>
             </>
             : null}
+            
     </Card>
    );
 }

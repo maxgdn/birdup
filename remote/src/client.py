@@ -4,7 +4,7 @@ from gql import gql, Client, AIOHTTPTransport
 class GQLClient:
     def __init__(self):
         # Select your transport with a defined url endpoint
-        transport = AIOHTTPTransport(url="http://192.168.4.2:8080/graphql")
+        transport = AIOHTTPTransport(url="http://192.168.4.2/graphql")
         # Create a GraphQL client using the defined transport
         self.client = Client(transport=transport, fetch_schema_from_transport=True)
     def capture(self):
