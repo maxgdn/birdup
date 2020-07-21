@@ -1,15 +1,22 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import {useStores} from '../core';
-import { ImageCard } from '../components';
+import { LinkPrevious } from 'grommet-icons';
+import { ImageCard, Button } from '../components';
 import { observer } from 'mobx-react'
 
 import {
-    useParams
+    useParams,
+    Link
   } from "react-router-dom";
 
 const FlexboxContainer = styled.div`
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  & > * {
+      margin-bottom: 1rem;
+  }
 `;
 
 const ImageView: React.FC = observer(() => {
@@ -21,6 +28,9 @@ const ImageView: React.FC = observer(() => {
 
     return (
         <FlexboxContainer>
+            <Link to={'/images'} style={{ textDecoration: 'none' }}>
+            <Button name={'Back'}icon={<LinkPrevious/>} />
+            </Link>
             <ImageCard sighting={sighting}/>
         </FlexboxContainer>
     );
