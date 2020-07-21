@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import {Capture, ImageList, CatchAll} from '../../pages';
+import {Capture, ImageList, CatchAll, Birds} from '../../pages';
 
 const ContentWrapper = styled.main`
     flex: 1;
@@ -21,6 +21,7 @@ const Content: React.FC = () => {
                 <Switch>
                     <Route exact path={'/'} component={Capture}/>
                     <Route path={'/images'} component={ImageList}/>
+                    <Route path={'/Birds'} component={Birds}/>
                     <Route component={CatchAll}/>
                 </Switch>
             </Center>

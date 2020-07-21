@@ -1,6 +1,8 @@
 dependencies:
   grommet-icons: 4.4.0_479e60ee9c1aa71dc1eb81036e3619dc
+  history: 5.0.0
   mobx: 5.15.4
+  mobx-react: 6.2.2_mobx@5.15.4+react@16.13.1
   react-router-dom: 5.2.0_react@16.13.1
   styled-components: 5.1.1_479e60ee9c1aa71dc1eb81036e3619dc
 devDependencies:
@@ -4868,6 +4870,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==
+  /history/5.0.0:
+    dependencies:
+      '@babel/runtime': 7.10.5
+    dev: false
+    resolution:
+      integrity: sha512-3NyRMKIiFSJmIPdq7FxkNMJkQ7ZEtVblOQ38VtKaA0zZMW1Eo6Q6W8oDKEflr1kNNTItSnk4JMCO1deeSgbLLg==
   /hmac-drbg/1.0.1:
     dependencies:
       hash.js: 1.1.7
@@ -6805,6 +6813,27 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
+  /mobx-react-lite/2.0.7_mobx@5.15.4+react@16.13.1:
+    dependencies:
+      mobx: 5.15.4
+      react: 16.13.1
+    dev: false
+    peerDependencies:
+      mobx: ^4.0.0 || ^5.0.0
+      react: ^16.8.0
+    resolution:
+      integrity: sha512-YKAh2gThC6WooPnVZCoC+rV1bODAKFwkhxikzgH18wpBjkgTkkR9Sb0IesQAH5QrAEH/JQVmy47jcpQkf2Au3Q==
+  /mobx-react/6.2.2_mobx@5.15.4+react@16.13.1:
+    dependencies:
+      mobx: 5.15.4
+      mobx-react-lite: 2.0.7_mobx@5.15.4+react@16.13.1
+      react: 16.13.1
+    dev: false
+    peerDependencies:
+      mobx: ^5.15.4 || ^4.15.4
+      react: ^16.8.0 || 16.9.0-alpha.0
+    resolution:
+      integrity: sha512-Us6V4ng/iKIRJ8pWxdbdysC6bnS53ZKLKlVGBqzHx6J+gYPYbOotWvhHZnzh/W5mhpYXxlXif4kL2cxoWJOplQ==
   /mobx/5.15.4:
     dev: false
     resolution:
@@ -10417,10 +10446,12 @@ specifiers:
   express: ^4.17.1
   file-loader: ^6.0.0
   grommet-icons: ^4.4.0
+  history: ^5.0.0
   html-webpack-plugin: ^4.3.0
   image-webpack-loader: ^6.0.0
   jest: ^26.1.0
   mobx: ^5.15.4
+  mobx-react: ^6.2.2
   node-sass: ^4.14.1
   react: ^16.13.1
   react-dom: ^16.13.1

@@ -3,7 +3,7 @@ import { GraphQLClient } from 'graphql-request'
 import Sighting from './domain/Sighting';
 import Bird from './domain/Bird';
 
-const endpoint = 'http://localhost:8080/graphql';
+const endpoint = 'http://localhost/graphql';
 
 const graphQLClient = new GraphQLClient(endpoint, {});
 
@@ -55,11 +55,12 @@ export const getSighting = async (id: string): Promise<Sighting> => {
 
 export const capture = async (): Promise<string> => {
     const mutation =`
-    {
-        capture {
-            id
-        }
-    }`;
+    mutation capture {
+      capture {
+        id
+      }
+    }
+    `;
 
     try {
         const data = await graphQLClient.request<string>(mutation);

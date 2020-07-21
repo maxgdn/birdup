@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
 import colors from '../../core/colors';
-import Title from './Title';
+import {Title} from '../../components';
 
 const FlexContainer = styled.div`
 max-width: 120rem;
@@ -30,8 +30,8 @@ const NavLinks = styled.ul`
     cursor: pointer;
 
     &:hover {
-      color: #fdcb6e;
-      border-bottom: 1px solid #fdcb6e;
+      color: ${colors.redlight};
+      border-bottom: 1px solid ${colors.redlight};
     }
   }
 `;
@@ -39,9 +39,11 @@ const NavLinks = styled.ul`
 const NavBar: React.FC = () => {
     return (
         <FlexContainer>
+            <Title/>
             <NavLinks>
                 <Link to={'/'}>Capture</Link>
-                <Link to={'/images'}>About</Link>
+                <Link to={'/images'}>Images</Link>
+                <Link to={'/birds'}>Birds</Link>
             </NavLinks>
         </FlexContainer>
     );

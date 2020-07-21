@@ -6,7 +6,7 @@ import { upsert } from "../util";
 
 export default class BirdStore {
     @observable 
-    public birds: BirdModel[];
+    public birds: BirdModel[] = [];
     
     @action
     public fetchData = async () => {

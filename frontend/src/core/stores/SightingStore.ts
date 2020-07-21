@@ -7,13 +7,15 @@ import { upsert } from '../util';
 
 export default class SightingStore {
     @observable
-    public sightings: SightingModel[];
+    public sightings: SightingModel[] = [];
 
     @action
     public fetchData = async () => {
         try {
             const sightings: Sighting[] = await allSightings();
             runInAction(() => {
+                console.log("Sightings");
+                console.log(sightings);
                 this.sightings = sightings.map(sighting => new SightingModel(sighting, this));
             });
 
@@ -51,7 +53,11 @@ export default class SightingStore {
         this.sightings = this.sightings.filter((sighting: Sighting) => sighting.id !== id);
     }
 
+    getSightings(): SightingModel[] {
+        return this.sightings.reverse();
+    }
+
     toJS(): Sighting[] {
-        return this.sightings.map((sighting: SightingModel) => sighting.toJS());
+        return this.sightings.map((sighting: SightingModel) => sighting.toJS()).reverse();
     }
 }
