@@ -1,4 +1,6 @@
 dependencies:
+  date-fns: 2.15.0
+  exifreader: 3.12.0
   grommet-icons: 4.4.0_479e60ee9c1aa71dc1eb81036e3619dc
   history: 5.0.0
   mobx: 5.15.4
@@ -3181,6 +3183,12 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-X5eWTSXO/BJmpdIKCRuKUgSCgAN0OwliVK3yPKbwIWU1Tdw5BRajxlzMidvh+gwko9AfQ9zIj52pzF91Q3YAvQ==
+  /date-fns/2.15.0:
+    dev: false
+    engines:
+      node: '>=0.11'
+    resolution:
+      integrity: sha512-ZCPzAMJZn3rNUvvQIMlXhDr4A+Ar07eLeGsGREoWU19a3Pqf5oYa+ccd+B3F6XVtQY6HANMFdOQ8A+ipFnvJdQ==
   /debug/2.6.9:
     dependencies:
       ms: 2.0.0
@@ -3900,6 +3908,13 @@ packages:
     optional: true
     resolution:
       integrity: sha512-8iA79xD3uAch729dUG8xaaBBFGaEa0wdD2VkYLFHwlqosEj/jT66AzcreRDSgV7ehnNLBW2WR5jIXwGKjVdTLg==
+  /exifreader/3.12.0:
+    dev: false
+    optionalDependencies:
+      xmldom: 0.1.31
+    requiresBuild: true
+    resolution:
+      integrity: sha512-uxYUCCcJRu/fS4Ig2Ys1H6pEZPnKynNPkn8WO+hD/dtpi2NXK38OgvyBgQa+LlsWSvCtvAtmT3iER49dyiiqow==
   /exit/0.1.2:
     dev: true
     engines:
@@ -10356,6 +10371,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+  /xmldom/0.1.31:
+    dev: false
+    engines:
+      node: '>=0.1'
+    optional: true
+    resolution:
+      integrity: sha512-yS2uJflVQs6n+CyjHoaBmVSqIDevTAWrzMmjG1Gc7h1qQ7uVozNhEPJAwZXWyGQ/Gafo3fCwrcaokezLPupVyQ==
   /xtend/4.0.2:
     dev: true
     engines:
@@ -10443,6 +10465,8 @@ specifiers:
   awesome-typescript-loader: ^5.2.1
   babel-loader: ^8.1.0
   css-loader: ^3.6.0
+  date-fns: ^2.15.0
+  exifreader: ^3.12.0
   express: ^4.17.1
   file-loader: ^6.0.0
   grommet-icons: ^4.4.0

@@ -6,9 +6,11 @@ import NavBar from './navbar/NavBar';
 
 import Title from './title/Title';
 
+import ImageCard from './imagecard/ImageCard';
+
 import Button from './button/Button';
 
 import GlobalStyle from './GlobalStyle'
 
 
-export {Content,GlobalStyle,Header, NavBar, Title, Button, CenterInPage};
+export {Content,GlobalStyle,Header, NavBar, Title, Button, CenterInPage, ImageCard};

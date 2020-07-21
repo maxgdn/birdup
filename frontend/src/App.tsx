@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import styled, { css } from 'styled-components';
 import { hot } from "react-hot-loader";
 import {Content, GlobalStyle, Header} from "./components";
-import {history} from './core';
+import {history, colors} from './core';
 
 
 const background = css`
-    background: #cfd9df;
-    background: linear-gradient(#cfd9df, #e2ebf0);
+    background: ${colors.greydark};
+    background: linear-gradient(${colors.greydark}, #e2ebf0);
 `;
 
 const Container = styled.div`

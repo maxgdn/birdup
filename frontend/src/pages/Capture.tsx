@@ -3,8 +3,8 @@ import {useEffect} from 'react';
 import { observer } from 'mobx-react'
 import styled from 'styled-components';
 
-import {Button, CenterInPage} from '../components';
-import {useStores} from '../core';
+import {Button, CenterInPage, ImageCard} from '../components';
+import {useStores, colors} from '../core';
 
 import { Camera } from 'grommet-icons';
 
@@ -13,21 +13,45 @@ import { Camera } from 'grommet-icons';
 //capture button
 //latest image taken (imagecard)
 
+const RecentImage = styled.h1`
+    font-style: bold;
+    font-size: 1rem;
+    color: ${colors.redlight}
+`;
+
+const CaptureFlexBox = styled.div`
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & > * {
+        margin: 0.5rem;
+    }
+`;
 
 const Capture: React.FC = observer(() => {
     const {sightingStore} = useStores();
-    sightingStore.fetchData();
+    useEffect(() => {
+        sightingStore.fetchData();
+    }, []);
 
     const captureImage = async () => {
-        console.log("Capture Page Clicked");
         sightingStore.snap();
     }
 
     const sightings = sightingStore.toJS();
     return (
         <CenterInPage>
-            <Button name={'Capture'} icon={<Camera/>} onClick={() => captureImage()}/>
-            {sightings.length > 0 ? <ImageCard> : <p>No Images Found</p>}
+            <CaptureFlexBox>
+                <div>
+                    <Button name={'Capture'} icon={<Camera/>} onClick={captureImage}/>
+                </div>
+                <div>
+                    <RecentImage>Most Recent Image :</RecentImage>
+                </div>
+                {sightings.length > 0 ? <ImageCard sighting={sightings[0]}/> : <p>No Images Found</p>}
+            </CaptureFlexBox>
         </CenterInPage>
     );
 });

@@ -5,7 +5,8 @@ const colors = {
     secondary: '#8d99ae',
     tertiary: '#edf2f4',
     redlight: '#ef233c',
-    reddark: '#d90429'
+    reddark: '#d90429',
+    greydark: '#cfd9df'
 };
 
 export default colors;

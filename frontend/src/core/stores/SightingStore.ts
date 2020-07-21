@@ -3,7 +3,7 @@ import SightingModel from "../models/SightingModel";
 import Sighting from "../domain/Sighting";
 import { allSightings, getSighting, capture } from "../client";
 
-import { upsert } from '../util';
+import { upsert, sleep } from '../util';
 
 export default class SightingStore {
     @observable
@@ -42,7 +42,6 @@ export default class SightingStore {
         try {
             const id: string = await capture();
             await this.fetchOne(id);
-
         } catch (error) {
             throw error;
         }

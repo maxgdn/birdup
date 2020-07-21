@@ -20,6 +20,7 @@ Written to assist in taking photos of birds at a feeder. Saves results to a DB v
   * ExifReader
   * GQLClient
   * Mobx
+  * date-fns
 * Backend
   * Java
   * Quarkus

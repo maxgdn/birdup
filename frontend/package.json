@@ -65,6 +65,8 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "date-fns": "^2.15.0",
+    "exifreader": "^3.12.0",
     "grommet-icons": "^4.4.0",
     "history": "^5.0.0",
     "mobx": "^5.15.4",

@@ -39,6 +39,8 @@ public class BirdUpResource {
     @Query("getSighting")
     @Description("Get a Sighting from storage")
     public Sighting getSighting(@Name("sightingId") String id) throws Exception {
+        System.out.println("ID ID ID ID ID");
+        System.out.println(id);
         return service.getSighting(id);
     }
 

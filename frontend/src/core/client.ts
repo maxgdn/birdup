@@ -5,6 +5,8 @@ import Bird from './domain/Bird';
 
 const endpoint = 'http://localhost/graphql';
 
+const imageUrl = 'http://localhost/fetch';
+
 const graphQLClient = new GraphQLClient(endpoint, {});
 
 const failedReq = new Error('Request failed');
@@ -23,8 +25,8 @@ export const allSightings = async (): Promise<Sighting[]> => {
     `;
 
     try {
-        const data = await graphQLClient.request<Sighting[]>(query);
-        return data;
+        const data = await graphQLClient.request<any>(query);
+        return data.allSightings;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -45,8 +47,9 @@ export const getSighting = async (id: string): Promise<Sighting> => {
     `;
 
     try {
-        const data = await graphQLClient.request<Sighting>(query, {id});
-        return data;
+        const data = await graphQLClient.request<any>(query, {id});
+        console.log(data);
+        return data.getSighting;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -63,8 +66,8 @@ export const capture = async (): Promise<string> => {
     `;
 
     try {
-        const data = await graphQLClient.request<string>(mutation);
-        return data;
+        const data = await graphQLClient.request<any>(mutation);
+        return data.capture.id;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -213,4 +216,17 @@ export const deleteBird = async (id: string): Promise<Bird> => {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
     }
+}
+
+export const fetchImage = async (id: string): Promise<string> => {
+  const response = await fetch(imageUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({id}),
+  });
+
+  const imgData: any = await response.json();
+  return imgData.file;
 }
