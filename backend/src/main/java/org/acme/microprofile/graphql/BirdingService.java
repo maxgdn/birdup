@@ -101,7 +101,10 @@ public class BirdingService {
     @Transactional
     public Bird createBird(String genusName, String name) throws Exception {
         UUID uuid = UUID.randomUUID();
+        Bird bird = new Bird();
         bird.setId(uuid);
+        bird.setGenusName(genusName);
+        bird.setName(name);
 
         if(bird.getGenusName() == null) throw new Exception("Bird genusName is empty.");
         if(bird.getName() == null) throw new Exception("Bird name is empty.");

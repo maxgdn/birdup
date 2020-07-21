@@ -88,7 +88,7 @@ public class BirdUpResource {
 
     @Mutation("createBird")
     @Description("Creates a Bird")
-    public Bird createBird(@Name("genusName") String genusName, @Name("name") Stirng name) throws Exception {
+    public Bird createBird(@Name("genusName") String genusName, @Name("name") String name) throws Exception {
         return service.createBird(genusName, name);
     }
 

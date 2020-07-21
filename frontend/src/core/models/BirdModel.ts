@@ -2,8 +2,12 @@ import { observable, action, computed, toJS } from "mobx";
 import Bird from '../domain/Bird';
 import Sighting from "../domain/Sighting";
 
+import {deleteBird} from '../client';
+
+import { BirdStore } from "../stores";
+
 export default class BirdModel {
-    store
+    public store: BirdStore;
     @observable
     public id: string;
 
@@ -16,7 +20,7 @@ export default class BirdModel {
     @observable
     public sightings: Sighting[]
 
-    constructor(bird: Bird, store) {
+    constructor(bird: Bird, store: BirdStore) {
         this.store = store;
 
         this.id = bird.id;
@@ -25,5 +29,22 @@ export default class BirdModel {
         this.sightings = bird.sightings;
     }
 
-    //can delete self
+    @action
+    public async delete() {
+        try {
+            await deleteBird(this.id);
+            this.store.remove(this.id);
+        } catch (error) {
+            throw new Error("Problem encountered deleting bird");
+        }
+    }
+
+    toJS(): Bird {
+        return {
+            id: this.id,
+            genusName: this.genusName,
+            name: this.name,
+            sightings: this.sightings,
+        }
+    }
 }

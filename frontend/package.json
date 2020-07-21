@@ -67,6 +67,7 @@
   "dependencies": {
     "grommet-icons": "^4.4.0",
     "mobx": "^5.15.4",
+    "react-router-dom": "^5.2.0",
     "styled-components": "^5.1.1"
   }
 }

@@ -70,17 +70,19 @@ export const capture = async (): Promise<string> => {
     }
 }
 
-export const addBird = async (sightingId: string, birdId: string): Promise<Sighting> => {
+export const addBird = async (sightingId: string, birdId: string): Promise<Bird[]> => {
     const mutation =`
       mutation AddBird($sightingId: String!, $birdId: String!) {
         addBird(sightingId: $sightingId, birdId: $birdId) {
-          id
+            birds {
+                id
+            }
         }
       }
     `;
 
     try {
-        const data = await graphQLClient.request<Sighting>(mutation, {sightingId, birdId});
+        const data = await graphQLClient.request<Bird[]>(mutation, {sightingId, birdId});
         return data;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
