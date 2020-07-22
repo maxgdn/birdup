@@ -40,8 +40,10 @@ export default class SightingModel {
     @action
     public removeBird = async (id: string) => {
         try {
-            await removeBird(this.id,id);
-            this.store.remove(this.id);
+            const birds: Bird[] = await removeBird(this.id,id);
+            runInAction(() => {
+                this.birds = birds;
+            });
         } catch (error) {
             throw error;
         }

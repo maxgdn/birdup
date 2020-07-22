@@ -1,9 +1,10 @@
 import * as React from "react";
+import {useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import styled, { css } from 'styled-components';
 import { hot } from "react-hot-loader";
 import {Content, GlobalStyle, Header} from "./components";
-import {history, colors} from './core';
+import {history, colors, useStores} from './core';
 
 
 const background = css`
@@ -20,6 +21,12 @@ const Container = styled.div`
 `;
 
 const App: React.FC = () => {
+    const {sightingStore, birdStore} = useStores();
+    useEffect(() => {
+        sightingStore.fetchData();
+        birdStore.fetchData();
+    }, []);
+    
     return (
         <Router history={history}>
             <Container>

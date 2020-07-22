@@ -4,8 +4,10 @@ import Sighting from './domain/Sighting';
 import Bird from './domain/Bird';
 
 const endpoint = 'http://localhost/graphql';
-
 const imageUrl = 'http://localhost/fetch';
+
+// const endpoint = 'http://192.168.4.70/graphql';
+// const imageUrl = 'http://192.168.4.70/fetch';
 
 const graphQLClient = new GraphQLClient(endpoint, {});
 
@@ -80,32 +82,38 @@ export const addBird = async (sightingId: string, birdId: string): Promise<Bird[
         addBird(sightingId: $sightingId, birdId: $birdId) {
             birds {
                 id
+                name
+                genusName
             }
         }
       }
     `;
 
     try {
-        const data = await graphQLClient.request<Bird[]>(mutation, {sightingId, birdId});
-        return data;
+        const data = await graphQLClient.request<any>(mutation, {sightingId, birdId});
+        return data.addBird;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
     }
 }
 
-export const removeBird = async (sightingId: string, birdId: string): Promise<Sighting> => {
+export const removeBird = async (sightingId: string, birdId: string): Promise<Bird[]> => {
     const mutation =`
       mutation RemoveBird($sightingId: String!, $birdId: String!) {
         removeBird(sightingId: $sightingId, birdId: $birdId) {
-          id
+          birds {
+            id
+            name
+            genusName
+          }
         }
       }
     `;
 
     try {
-        const data = await graphQLClient.request<Sighting>(mutation, {sightingId, birdId});
-        return data;
+        const data = await graphQLClient.request<any>(mutation, {sightingId, birdId});
+        return data.removeBird;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -127,8 +135,8 @@ export const allBirds = async (): Promise<Bird[]> => {
     `;
 
     try {
-        const data = await graphQLClient.request<Bird[]>(query);
-        return data;
+        const data = await graphQLClient.request<any>(query);
+        return data.allBirds;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -150,8 +158,8 @@ export const getBird = async (id: string): Promise<Bird> => {
     `;
 
     try {
-        const data = await graphQLClient.request<Bird>(query, {id});
-        return data;
+        const data = await graphQLClient.request<any>(query, {id});
+        return data.getBird;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -169,8 +177,8 @@ export const getSightingsByBird = async (id: string): Promise<Sighting[]> => {
     `;
 
     try {
-        const data = await graphQLClient.request<Sighting[]>(query, {id});
-        return data;
+        const data = await graphQLClient.request<any>(query, {id});
+        return data.getSightingsByBird;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;
@@ -192,8 +200,8 @@ export const createBird = async (genusName: string, name: string): Promise<Bird>
     `;
 
     try {
-        const data = await graphQLClient.request<Bird>(mutation, {genusName,name});
-        return data;
+        const data = await graphQLClient.request<any>(mutation, {genusName,name});
+        return data.createBird;
     } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
         throw failedReq;

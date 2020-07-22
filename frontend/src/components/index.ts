@@ -15,5 +15,9 @@ import GlobalStyle from './GlobalStyle'
 import ImageCollection from './imagecollection/ImageCollection';
 import ImageItem from './imagecollection/ImageItem';
 
+import BirdCollection from './birdcollection/BirdCollection';
+import BirdCreate from './birdcollection/BirdCreate';
 
-export {Content,GlobalStyle,Header, NavBar, Title, Button, CenterInPage, ImageCard, ImageItem, ImageCollection};
+import AddRemove from './addremove/AddRemove';
+
+export {Content,GlobalStyle,Header, NavBar, Title, Button, CenterInPage, ImageCard, ImageItem, ImageCollection, BirdCollection, BirdCreate, AddRemove};

@@ -32,9 +32,10 @@ const CaptureFlexBox = styled.div`
 `;
 
 const Capture: React.FC = observer(() => {
-    const {sightingStore} = useStores();
+    const {sightingStore, birdStore} = useStores();
     useEffect(() => {
         sightingStore.fetchData();
+        birdStore.fetchData();
     }, []);
 
     const captureImage = async () => {

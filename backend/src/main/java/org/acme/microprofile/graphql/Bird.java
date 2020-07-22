@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Cacheable;
 import javax.persistence.FetchType;
-import javax.persistence.QueryHint;;
+import javax.persistence.QueryHint;
 import javax.persistence.NamedQuery;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany; 

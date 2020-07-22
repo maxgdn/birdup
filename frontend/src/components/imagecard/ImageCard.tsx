@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
+import { observer } from 'mobx-react'
 import styled from 'styled-components';
 import {base64ToArrayBuffer} from '../../core/util'
 import { format } from 'date-fns'
@@ -7,11 +8,12 @@ import * as ExifReader from 'exifreader';
 
 import Sighting from '../../core/domain/Sighting';
 
-
 import {colors} from '../../core';
 
 import {fetchImage} from '../../core/client';
 import SightingModel from '../../core/models/SightingModel';
+import Bird from '../../core/domain/Bird';
+import { AddRemove } from '..';
 
 interface ImageCardProps {
     sighting: SightingModel
@@ -39,7 +41,13 @@ const Item = styled.div`
     color: ${colors.tertiary};
 `;
 
-const ItemContainer = styled.div`
+const AddRemoveContainer = styled.div`
+    margin: auto;
+`;
+
+const Tag = styled.span`
+    background-color: ${colors.white};
+    color: ${colors.primary};
 `;
 
 interface ImageState {
@@ -47,15 +55,13 @@ interface ImageState {
     tags: any;
 }
 
-const ImageCard: React.FC<ImageCardProps> = (props) => {
+const ImageCard: React.FC<ImageCardProps> = observer((props) => {
     const [data, setData] = useState<ImageState>({image: "", tags: {}});
     const sighting = props.sighting.toJS();
     useEffect(() => {
         let getData = async () => {
             const d = await fetchImage(sighting.id + '.jpeg');
             const meta = ExifReader.load(base64ToArrayBuffer(d));
-            console.log("TAGS");
-            console.log(meta);
             setData({image: d, tags:meta});
         }
         
@@ -67,6 +73,11 @@ const ImageCard: React.FC<ImageCardProps> = (props) => {
         <Image src={"data:image/jpg;base64," + data.image}/>
         <Item>ID: {sighting.id}</Item>
         <Item>Captured Date: {format(new Date(sighting.capturedDate),"yyyy-MM-dd' 'HH:mm:ss")}</Item>
+        <Item>
+            Tags: {sighting.birds.length > 0 ? sighting.birds.map((bird: Bird) => {
+                return <Tag>{bird.name}</Tag>
+            }) : "No bird tags"}
+        </Item>
         {Object.keys(data.tags).length > 0 ?
             <>
             <Item>Model : {data.tags.Model.description}</Item>
@@ -76,9 +87,14 @@ const ImageCard: React.FC<ImageCardProps> = (props) => {
             <Item>Width : {data.tags['Image Width'].description}</Item>
             </>
             : null}
+        <Item>
+            <AddRemoveContainer>
+            <AddRemove sighting={props.sighting}/>
+            </AddRemoveContainer>
+        </Item>
             
     </Card>
    );
-}
+});
 
 export default ImageCard;

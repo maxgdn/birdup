@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import java.util.UUID;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class Sighting {
 
     @Id
     @Column
-    private String id;
+    private UUID id;
 
     @Column
     private Date capturedDate;
@@ -42,7 +43,7 @@ public class Sighting {
         return id.toString();
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -13,7 +13,7 @@ export default class BirdStore {
         try {
             const birds: Bird[] = await allBirds();
             runInAction(() => {
-                this.birds = birds.map(bird => new BirdModel(bird, this));
+                this.birds = birds.map(bird => new BirdModel(bird, this)).reverse();
             });
 
         } catch (error) {

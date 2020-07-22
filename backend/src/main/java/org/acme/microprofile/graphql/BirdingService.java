@@ -25,7 +25,8 @@ public class BirdingService {
     }
 
     public Sighting getSighting(String id) throws Exception {
-        Sighting entity = entityManager.find(Sighting.class, id);
+        UUID uuid = UUID.fromString(id);
+        Sighting entity = entityManager.find(Sighting.class, uuid);
         if(entity == null) {
             throw new Exception("Sighting with id of " + id + "doesn't not exist.");
         }
@@ -34,8 +35,9 @@ public class BirdingService {
 
     @Transactional
     public Sighting createSighting(String id){
+        UUID uuid = UUID.fromString(id);
         Sighting entity = new Sighting();
-        entity.setId(id);
+        entity.setId(uuid);
         entity.setCapturedDate(new Date());
         entityManager.persist(entity);
         return entity;
@@ -43,8 +45,14 @@ public class BirdingService {
 
     @Transactional
     public Sighting addBird(String sightingId,String birdId) throws Exception {
-        Sighting sightingEntity = entityManager.find(Sighting.class, sightingId);
-        Bird birdEntity = entityManager.find(Bird.class, birdId);
+        System.out.println("Sight");
+        System.out.println(sightingId);
+        System.out.println("Bird");
+        System.out.println(birdId);
+        UUID suuid = UUID.fromString(sightingId);
+        UUID buuid = UUID.fromString(birdId);
+        Sighting sightingEntity = entityManager.find(Sighting.class, suuid);
+        Bird birdEntity = entityManager.find(Bird.class, buuid);
         if(sightingEntity == null) {
             throw new Exception("Sighting with id of " + sightingId + "doesn't not exist.");
         }
@@ -61,8 +69,10 @@ public class BirdingService {
 
     @Transactional
     public Sighting removeBird(String sightingId,String birdId) throws Exception {
-        Sighting sightingEntity = entityManager.find(Sighting.class, sightingId);
-        Bird birdEntity = entityManager.find(Bird.class, birdId);
+        UUID suuid = UUID.fromString(sightingId);
+        UUID buuid = UUID.fromString(birdId);
+        Sighting sightingEntity = entityManager.find(Sighting.class, suuid);
+        Bird birdEntity = entityManager.find(Bird.class, buuid);
         if(sightingEntity == null) {
             throw new Exception("Sighting with id of " + sightingId + "doesn't not exist.");
         }
@@ -83,7 +93,8 @@ public class BirdingService {
     }
     
     public Bird getBird(String id) throws Exception {
-        Bird entity = entityManager.find(Bird.class, id);
+        UUID uuid = UUID.fromString(id);
+        Bird entity = entityManager.find(Bird.class, uuid);
         if(entity == null) {
             throw new Exception("Bird with id of " + id + "doesn't not exist.");
         }
@@ -91,7 +102,8 @@ public class BirdingService {
     }
 
     public List<Sighting> getSightingsByBird(String id) throws Exception {
-        Bird entity = entityManager.find(Bird.class, id);
+        UUID uuid = UUID.fromString(id);
+        Bird entity = entityManager.find(Bird.class, uuid);
         if(entity == null) {
             throw new Exception("Bird with id of " + id + "doesn't not exist.");
         }
@@ -115,9 +127,14 @@ public class BirdingService {
 
     @Transactional
     public Bird deleteBird(String id) throws Exception {
-        Bird entity = entityManager.find(Bird.class, id);
+        UUID uuid = UUID.fromString(id);
+        Bird entity = entityManager.find(Bird.class, uuid);
         if(entity == null) {
             throw new Exception("Bird with id of " + id + "doesn't not exist.");
+        }
+
+        for(Sighting sighting : entity.getSightings()) {
+            sighting.removeBird(entity);
         }
 
         entityManager.remove(entity);

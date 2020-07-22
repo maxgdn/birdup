@@ -29,7 +29,7 @@ const ImageCollection: React.FC = observer(() => {
         <Link to={`${url}/${sighting.id}`} style={{ textDecoration: 'none' }}>
             <ImageItem sighting={sighting}/>
         </Link>
-        ) : null}
+        ) : "No Images Found"}
         </FlexContainer>
     );
 });
