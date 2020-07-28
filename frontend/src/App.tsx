@@ -26,7 +26,7 @@ const App: React.FC = () => {
         sightingStore.fetchData();
         birdStore.fetchData();
     }, []);
-    
+
     return (
         <Router history={history}>
             <Container>

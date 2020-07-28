@@ -66,6 +66,7 @@
   "dependencies": {
     "date-fns": "^2.15.0",
     "exifreader": "^3.12.0",
+    "graphql-request": "^2.0.0",
     "grommet-icons": "^4.4.0",
     "history": "^5.0.0",
     "mobx": "^5.15.4",
