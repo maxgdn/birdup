@@ -136,7 +136,7 @@ func (a *App) UploadHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Init() MinioConnection {
-	endpoint := "localhost:9001"
+	endpoint := "0.0.0.0:9001"
 	accessKeyID := "minio"
 	secretAccessKey := "minio123"
 	useSSL := false

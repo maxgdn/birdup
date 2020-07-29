@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  proxy:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    network_mode: "host"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    network_mode: "host"
+
+  #backend:
+  #  build: 
+  #    context: ./backend/src/main/docker/
+  #    dockerfile: Dockerfile.jvm
+  #  ports:
+  #    - "8080:8080"
+  # network_mode: "host"
+
+  storage:
+      build: './storage'
+      ports:
+      - "8082:8082"
+      network_mode: "host"
